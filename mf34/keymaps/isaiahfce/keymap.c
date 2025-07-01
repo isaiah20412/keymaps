@@ -17,17 +17,43 @@ const rgblight_segment_t PROGMEM layer_0[] = RGBLIGHT_LAYER_SEGMENTS(
 
 const rgblight_segment_t PROGMEM layer_1[] = RGBLIGHT_LAYER_SEGMENTS(
     {7, 3, HSV_GREEN},
-    {14, 3, HSV_GREEN}
+    {14, 3, HSV_GREEN},
+    {24, 1, HSV_GREEN},
+    {29, 4, HSV_GREEN}
 );
 
 const rgblight_segment_t PROGMEM layer_2[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 34, HSV_CYAN}
+    {0, 5, HSV_CYAN},
+    {6, 1, HSV_WHITE},
+    {7, 3,  HSV_CYAN},
+    {14, 3, HSV_CYAN},
+    {24, 1, HSV_CYAN},
+    {33, 1, HSV_WHITE},
+    {28, 3, HSV_CYAN}
+);
+
+const rgblight_segment_t PROGMEM layer_3[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 3, 0, 0, 0},
+    {3, 2, HSV_PURPLE},
+    {5, 2, 0, 0, 0},
+    {7, 3, HSV_PURPLE},
+    {10, 2, 0, 0, 0},
+    {12, 1, HSV_PURPLE},
+    {13, 1, 0, 0, 0},
+    {14, 2, HSV_PURPLE},
+    {16, 5, 0, 0, 0},
+    {20, 1, HSV_PURPLE},
+    {22, 2, 0, 0, 0},
+    {24, 4, HSV_PURPLE},
+    {28, 4, HSV_PURPLE},
+    {33, 2, 0, 0, 0}
 );
 
 const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     layer_0,
     layer_1,
-    layer_2
+    layer_2,
+    layer_3
 );
 
 void keyboard_post_init_user(void) {
@@ -43,6 +69,7 @@ layer_state_t default_layer_state_set_user(layer_state_t state) {
 layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(1, get_highest_layer(state) == 1);
     rgblight_set_layer_state(2, get_highest_layer(state) == 2);
+    rgblight_set_layer_state(3, get_highest_layer(state) == 3);
     return state;
 }
 
