@@ -2,6 +2,7 @@
 #if __has_include("keymap.h")
 #    include "keymap.h"
 #endif
+#include "ws2812.h"
 
 
 /* THIS FILE WAS GENERATED!
@@ -10,11 +11,47 @@
  * edit it directly.
  */
 
+const rgblight_segment_t PROGMEM layer_0[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 34, HSV_RED}
+);
+
+const rgblight_segment_t PROGMEM layer_1[] = RGBLIGHT_LAYER_SEGMENTS(
+    {7, 3, HSV_GREEN},
+    {14, 3, HSV_GREEN}
+);
+
+const rgblight_segment_t PROGMEM layer_2[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 34, HSV_CYAN}
+);
+
+const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    layer_0,
+    layer_1,
+    layer_2
+);
+
+void keyboard_post_init_user(void) {
+    rgblight_layers = rgb_layers;
+}
+
+
+layer_state_t default_layer_state_set_user(layer_state_t state) {
+    rgblight_set_layer_state(0, get_highest_layer(state) == 0);
+    return state;
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    rgblight_set_layer_state(1, get_highest_layer(state) == 1);
+    rgblight_set_layer_state(2, get_highest_layer(state) == 2);
+    return state;
+}
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(KC_ESC, MO(2), KC_TAB, LCTL(KC_C), LCTL(KC_V), KC_F2, KC_BSPC, KC_F9, KC_F6, KC_F11, LCTL(KC_A), KC_PSLS, KC_PAST, KC_PMNS, KC_DEL, LCA(KC_D), LCA(KC_I), KC_P7, KC_P8, KC_P9, KC_P4, KC_P5, KC_P6, KC_PPLS, LCTL(KC_H), KC_P1, KC_P2, KC_P3, MO(3), RCS(KC_H), KC_SPC, LSFT_T(KC_P0), LCTL_T(KC_PDOT), KC_PENT),
     [1] = LAYOUT(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_INS, KC_HOME, KC_PGUP, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_DEL, KC_END, KC_PGDN, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_UP, KC_TRNS, KC_TRNS, KC_TRNS, LT(3,KC_LEFT), KC_DOWN, KC_RGHT, LSFT_T(KC_P0), LCTL_T(KC_PDOT), KC_TRNS),
     [2] = LAYOUT(TO(0), KC_TRNS, TO(1), RGB_SAD, RGB_SAI, KC_TRNS, QK_BOOT, RGB_TOG, RGB_HUI, RM_NEXT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_HUD, RM_PREV, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_VAI, KC_TRNS, KC_TRNS, KC_TRNS, RGB_SPD, RGB_VAD, RGB_SPI, KC_TRNS, KC_TRNS, EE_CLR),
-    [3] = LAYOUT(KC_NO, KC_NO, KC_NO, RCS(KC_C), LCA(KC_V), KC_NO, KC_NO, LCTL(KC_F9), LSFT(KC_F6), LCTL(KC_F11), KC_NO, KC_NO, KC_NO, KC_NO, RCS(KC_D), KC_F3, KC_NO, KC_NO, KC_NO, KC_NO, LCTL(KC_S), KC_NO, KC_NO, KC_NO, LCA(KC_L), LCTL(KC_Z), LCTL(KC_Y), LCA(KC_R), KC_TRNS, LCA(KC_T), KC_F24, LSFT(KC_4), KC_NO, KC_NO)
+    [3] = LAYOUT(KC_NO, KC_NO, KC_NO, RCS(KC_C), LCA(KC_V), KC_NO, KC_NO, LCTL(KC_F9), LSFT(KC_F6), LCTL(KC_F11), KC_NO, KC_NO, LCA(KC_PAST), KC_NO, RCS(KC_D), KC_F3, KC_NO, KC_NO, KC_NO, KC_NO, LCTL(KC_S), KC_NO, KC_NO, KC_NO, LCA(KC_L), LCTL(KC_Z), LCTL(KC_Y), LCA(KC_R), KC_TRNS, LCA(KC_T), KC_F24, LSFT(KC_4), KC_NO, KC_NO)
 };
 
 
